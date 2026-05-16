@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Discovery | LifeCompass</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="{{ url_for('home') }}">LifeCompass</a>
+        <nav>
+            <a class="active" href="{{ url_for('mode1') }}">Career Discovery</a>
+            <a href="{{ url_for('mode2') }}">Balance</a>
+        </nav>
+    </header>
+
+    <main class="form-shell">
+        <section class="page-heading energy-heading page-depth" data-reveal>
+            <p class="eyebrow">Mode 1</p>
+            <h1>Career Discovery</h1>
+            <p>Pick your instincts, explore different directions, and let LifeCompass decode the pattern behind your choices.</p>
+            <div class="depth-tags" aria-label="Questionnaire style">
+                <span>Reflect</span>
+                <span>Choose</span>
+                <span>Reveal</span>
+            </div>
+        </section>
+
+        <form method="post" class="questionnaire guided-form" data-guided-form>
+            <aside class="compass-panel" aria-live="polite">
+                <span class="mini-label">Compass note</span>
+                <p data-compass-note>Start with your instinct. The map reacts as your choices build a pattern.</p>
+                <div class="progress-track" aria-hidden="true">
+                    <span data-progress-bar></span>
+                </div>
+                <small><span data-progress-count>0</span> of 5 reflection questions answered</small>
+            </aside>
+
+            <div class="field-group">
+                <label for="name">Your name</label>
+                <input id="name" name="name" type="text" placeholder="Ayush">
+            </div>
+
+            <fieldset class="question-card">
+                <legend>When you get free time, what naturally pulls your attention?</legend>
+                <div class="answer-grid">
+                    <label><input required type="radio" name="q_curiosity" value="build_app"><span>Building an app, game, or digital idea</span></label>
+                    <label><input type="radio" name="q_curiosity" value="run_experiment"><span>Understanding biology, experiments, or how life works</span></label>
+                    <label><input type="radio" name="q_curiosity" value="make_song"><span>Music, writing, visuals, or performing</span></label>
+                    <label><input type="radio" name="q_curiosity" value="train_match"><span>Training, competing, or improving in sport</span></label>
+                    <label><input type="radio" name="q_curiosity" value="launch_idea"><span>Thinking of products, brands, or earning ideas</span></label>
+                </div>
+            </fieldset>
+
+            <fieldset class="question-card">
+                <legend>Which kind of problem feels satisfying to solve?</legend>
+                <div class="answer-grid">
+                    <label><input required type="radio" name="q_problem" value="logic"><span>A logical puzzle with a clear solution</span></label>
+                    <label><input type="radio" name="q_problem" value="people"><span>A people problem where communication matters</span></label>
+                    <label><input type="radio" name="q_problem" value="expression"><span>Turning feelings or ideas into something expressive</span></label>
+                    <label><input type="radio" name="q_problem" value="performance"><span>Performing better under pressure</span></label>
+                    <label><input type="radio" name="q_problem" value="systems"><span>Organizing a system so it works smoothly</span></label>
+                </div>
+            </fieldset>
+
+            <fieldset class="question-card">
+                <legend>Pick the workday you would be curious to try.</legend>
+                <div class="answer-grid">
+                    <label><input required type="radio" name="q_workday" value="laptop"><span>Laptop, code, tools, and focused building</span></label>
+                    <label><input type="radio" name="q_workday" value="lab"><span>Lab, research notes, samples, and discovery</span></label>
+                    <label><input type="radio" name="q_workday" value="studio"><span>Studio, camera, mic, editing, or design</span></label>
+                    <label><input type="radio" name="q_workday" value="ground"><span>Ground, gym, team, and disciplined practice</span></label>
+                    <label><input type="radio" name="q_workday" value="market"><span>Clients, campaigns, money, and decisions</span></label>
+                </div>
+            </fieldset>
+
+            <fieldset class="question-card">
+                <legend>What kind of achievement would feel meaningful?</legend>
+                <div class="answer-grid">
+                    <label><input required type="radio" name="q_success" value="useful_tool"><span>Making a tool people genuinely use</span></label>
+                    <label><input type="radio" name="q_success" value="new_discovery"><span>Discovering or proving something important</span></label>
+                    <label><input type="radio" name="q_success" value="moving_people"><span>Moving people through art, voice, or stories</span></label>
+                    <label><input type="radio" name="q_success" value="championship"><span>Winning, selection, fitness, or visible performance</span></label>
+                    <label><input type="radio" name="q_success" value="independent_venture"><span>Creating an independent venture or income path</span></label>
+                </div>
+            </fieldset>
+
+            <fieldset class="question-card">
+                <legend>If you had one month to learn something seriously, what would you choose?</legend>
+                <div class="answer-grid">
+                    <label><input required type="radio" name="q_learning" value="coding_ai"><span>Coding, AI, websites, or data</span></label>
+                    <label><input type="radio" name="q_learning" value="bio_health"><span>Biology, medicine, health, or research</span></label>
+                    <label><input type="radio" name="q_learning" value="editing_music"><span>Editing, music production, writing, or content</span></label>
+                    <label><input type="radio" name="q_learning" value="fitness_drills"><span>Fitness, coaching, cricket, or sports technique</span></label>
+                    <label><input type="radio" name="q_learning" value="money_marketing"><span>Marketing, finance, selling, or business</span></label>
+                </div>
+            </fieldset>
+
+            <fieldset class="soft-section">
+                <legend>Add extra signals if they matter</legend>
+                <p class="helper-text">These are optional. They help the system notice passions that one question may miss.</p>
+                <div class="choice-grid pill-grid">
+                    <label><input type="checkbox" name="hobbies" value="coding"><span>Coding</span></label>
+                    <label><input type="checkbox" name="hobbies" value="music"><span>Music</span></label>
+                    <label><input type="checkbox" name="hobbies" value="cricket"><span>Cricket</span></label>
+                    <label><input type="checkbox" name="hobbies" value="writing"><span>Writing</span></label>
+                    <label><input type="checkbox" name="hobbies" value="photography"><span>Photography</span></label>
+                    <label><input type="checkbox" name="hobbies" value="fitness"><span>Fitness</span></label>
+                    <label><input type="checkbox" name="hobbies" value="biology research"><span>Biology research</span></label>
+                    <label><input type="checkbox" name="hobbies" value="startup ideas"><span>Startup ideas</span></label>
+                </div>
+            </fieldset>
+
+            <fieldset class="soft-section">
+                <legend>What describes you on a good day?</legend>
+                <div class="choice-grid pill-grid">
+                    <label><input type="checkbox" name="skills" value="python"><span>Comfortable with tech</span></label>
+                    <label><input type="checkbox" name="skills" value="communication"><span>Good at explaining</span></label>
+                    <label><input type="checkbox" name="skills" value="editing"><span>Patient with editing</span></label>
+                    <label><input type="checkbox" name="skills" value="maths"><span>Okay with maths</span></label>
+                    <label><input type="checkbox" name="skills" value="teamwork"><span>Team player</span></label>
+                    <label><input type="checkbox" name="skills" value="leadership"><span>Likes leading</span></label>
+                    <label><input type="checkbox" name="personality" value="analytical"><span>Analytical</span></label>
+                    <label><input type="checkbox" name="personality" value="creative"><span>Creative</span></label>
+                    <label><input type="checkbox" name="personality" value="curious"><span>Curious</span></label>
+                    <label><input type="checkbox" name="personality" value="disciplined"><span>Disciplined</span></label>
+                </div>
+            </fieldset>
+
+            <div class="actions">
+                <a class="button ghost" href="{{ url_for('home') }}">Back</a>
+                <button class="button primary" type="submit">Reveal my paths</button>
+            </div>
+        </form>
+    </main>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

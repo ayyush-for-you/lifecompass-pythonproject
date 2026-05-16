@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Guidance | LifeCompass</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="{{ url_for('home') }}">LifeCompass</a>
+        <nav>
+            <a href="{{ url_for('mode1') }}">Career Discovery</a>
+            <a href="{{ url_for('mode2') }}">Balance</a>
+        </nav>
+    </header>
+
+    <main class="result-shell">
+        <section class="result-hero result-card" data-reveal>
+            <p class="eyebrow">Guidance for {{ name }}</p>
+            <h1>{{ result.headline }}</h1>
+            <p>{{ result.summary }}</p>
+            <div class="depth-tags" aria-label="Result flow">
+                <span>Signal</span>
+                <span>Path</span>
+                <span>Next step</span>
+            </div>
+        </section>
+
+        <section class="chart-section" data-reveal>
+            <div>
+                <h2>Interest Distribution</h2>
+                <p>These scores are relative, so the highest domain becomes 100 and the others are scaled against it.</p>
+            </div>
+            <img src="{{ url_for('static', filename=result.chart_filename) }}" alt="Interest distribution chart">
+        </section>
+
+        {% if result.mode == "career" %}
+            <section>
+                <div class="section-heading">
+                    <h2>Primary Career Paths</h2>
+                    <p>Strongest matches based on interests, skills, hobbies, and personality.</p>
+                </div>
+                <div class="recommendation-grid">
+                    {% for path in result.primary_paths %}
+                        <article class="recommendation-card interactive-card" data-reveal>
+                            <span>{{ path.domain }} · {{ path.category }}</span>
+                            <h3>{{ path.title }}</h3>
+                            <p>{{ path.description }}</p>
+                            <dl>
+                                <dt>Why this suits you</dt>
+                                <dd>{{ path.reason }}</dd>
+                                <dt>Effort expectation</dt>
+                                <dd>{{ path.effort }}</dd>
+                                <dt>Risk awareness</dt>
+                                <dd>{{ path.risk }}</dd>
+                                <dt>Backup option</dt>
+                                <dd>{{ path.backup }}</dd>
+                            </dl>
+                        </article>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <section>
+                <div class="section-heading">
+                    <h2>Secondary Options</h2>
+                    <p>Good alternatives to explore alongside your main direction.</p>
+                </div>
+                <div class="option-list">
+                    {% for path in result.secondary_paths %}
+                        <div>
+                            <strong>{{ path.title }}</strong>
+                            <span>{{ path.domain }} · {{ path.backup }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        {% else %}
+            <section>
+                <div class="section-heading">
+                    <h2>Balance Plan</h2>
+                    <p>Small, realistic steps to rebuild energy and reconnect with interests.</p>
+                </div>
+                <ol class="plan-list">
+                    {% for item in result.balance_plan %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                </ol>
+            </section>
+
+            <section>
+                <div class="section-heading">
+                    <h2>Side Skills</h2>
+                    <p>Build these lightly while keeping your main career stable.</p>
+                </div>
+                <div class="skill-pills">
+                    {% for skill in result.side_skills %}
+                        <span>{{ skill }}</span>
+                    {% endfor %}
+                </div>
+            </section>
+        {% endif %}
+
+        <div class="actions end-actions" data-reveal>
+            <a class="button ghost" href="{{ url_for('home') }}">Home</a>
+            <a class="button primary" href="{{ url_for('dashboard') }}">Open dashboard</a>
+            <a class="button secondary" href="{{ url_for('mentor') }}">Ask AI mentor</a>
+            <a class="button primary" href="{{ url_for('mode1') }}">Try career mode</a>
+            <a class="button secondary" href="{{ url_for('mode2') }}">Try balance mode</a>
+        </div>
+    </main>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

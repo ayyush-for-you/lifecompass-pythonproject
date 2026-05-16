@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balance & Rediscovery | LifeCompass</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="{{ url_for('home') }}">LifeCompass</a>
+        <nav>
+            <a href="{{ url_for('mode1') }}">Career Discovery</a>
+            <a class="active" href="{{ url_for('mode2') }}">Balance</a>
+        </nav>
+    </header>
+
+    <main class="form-shell">
+        <section class="page-heading energy-heading page-depth" data-reveal>
+            <p class="eyebrow">Mode 2</p>
+            <h1>Balance & Rediscovery</h1>
+            <p>A lively reset space for finding energy, hobbies, and side paths that still feel exciting.</p>
+            <div class="depth-tags" aria-label="Balance mode rhythm">
+                <span>Pause</span>
+                <span>Notice</span>
+                <span>Begin</span>
+            </div>
+        </section>
+
+        <form method="post" class="questionnaire guided-form" data-guided-form>
+            <aside class="compass-panel" aria-live="polite">
+                <span class="mini-label">Energy map</span>
+                <p data-compass-note>Choose what feels true today. The plan updates around your energy and interests.</p>
+                <div class="progress-track" aria-hidden="true">
+                    <span data-progress-bar></span>
+                </div>
+                <small><span data-progress-count>0</span> of 4 reflection questions answered</small>
+            </aside>
+
+            <div class="field-grid">
+                <div class="field-group">
+                    <label for="name">Your name</label>
+                    <input id="name" name="name" type="text" placeholder="Ayush">
+                </div>
+                <div class="field-group">
+                    <label for="current_field">Current field</label>
+                    <input id="current_field" name="current_field" type="text" placeholder="Engineering, school, job, etc.">
+                </div>
+            </div>
+
+            <fieldset class="question-card">
+                <legend>How does your current routine feel?</legend>
+                <div class="answer-grid">
+                    <label><input required type="radio" name="q_state" value="exhausted"><span>Exhausted. Even small tasks feel heavy.</span></label>
+                    <label><input type="radio" name="q_state" value="stretched"><span>Stretched. I can manage, but I need space.</span></label>
+                    <label><input type="radio" name="q_state" value="flat"><span>Flat. Nothing feels very exciting right now.</span></label>
+                    <label><input type="radio" name="q_state" value="restless"><span>Restless. I want change but need direction.</span></label>
+                    <label><input type="radio" name="q_state" value="ready"><span>Ready. I have energy to rebuild a routine.</span></label>
+                </div>
+            </fieldset>
+
+            <fieldset class="question-card">
+                <legend>What do you miss most about your older self?</legend>
+                <div class="answer-grid">
+                    <label><input required type="radio" name="q_missed_activity" value="making_things"><span>Making things just because I enjoyed it</span></label>
+                    <label><input type="radio" name="q_missed_activity" value="movement"><span>Moving, training, playing, or feeling fit</span></label>
+                    <label><input type="radio" name="q_missed_activity" value="learning"><span>Learning with curiosity instead of pressure</span></label>
+                    <label><input type="radio" name="q_missed_activity" value="building_income"><span>Feeling independent or building something of my own</span></label>
+                    <label><input type="radio" name="q_missed_activity" value="sharing_voice"><span>Sharing my voice, ideas, or creativity</span></label>
+                </div>
+            </fieldset>
+
+            <fieldset class="question-card">
+                <legend>Which small weekly step feels realistic?</legend>
+                <div class="answer-grid">
+                    <label><input required type="radio" name="q_small_step" value="twenty_code"><span>Twenty minutes of coding or building</span></label>
+                    <label><input type="radio" name="q_small_step" value="read_research"><span>Reading one article or learning note</span></label>
+                    <label><input type="radio" name="q_small_step" value="record_create"><span>Recording, writing, editing, or sketching</span></label>
+                    <label><input type="radio" name="q_small_step" value="train_body"><span>A short workout, walk, drill, or practice session</span></label>
+                    <label><input type="radio" name="q_small_step" value="sell_idea"><span>Testing a small business, content, or money idea</span></label>
+                </div>
+            </fieldset>
+
+            <fieldset class="question-card">
+                <legend>What usually restores you best?</legend>
+                <div class="answer-grid">
+                    <label><input required type="radio" name="q_restore" value="quiet_learning"><span>Quiet learning and thinking time</span></label>
+                    <label><input type="radio" name="q_restore" value="creative_play"><span>Creative play without judgment</span></label>
+                    <label><input type="radio" name="q_restore" value="physical_reset"><span>Physical reset and better sleep rhythm</span></label>
+                    <label><input type="radio" name="q_restore" value="talking_people"><span>Talking to people who understand</span></label>
+                    <label><input type="radio" name="q_restore" value="structured_plan"><span>A clear plan I can follow with momentum</span></label>
+                </div>
+            </fieldset>
+
+            <fieldset class="soft-section">
+                <legend>Activities you want back in life</legend>
+                <p class="helper-text">Optional, but useful if something specific keeps coming to mind.</p>
+                <div class="choice-grid pill-grid">
+                    <label><input type="checkbox" name="hobbies" value="music"><span>Music</span></label>
+                    <label><input type="checkbox" name="hobbies" value="fitness"><span>Fitness</span></label>
+                    <label><input type="checkbox" name="hobbies" value="writing"><span>Writing</span></label>
+                    <label><input type="checkbox" name="hobbies" value="photography"><span>Photography</span></label>
+                    <label><input type="checkbox" name="hobbies" value="cricket"><span>Cricket</span></label>
+                    <label><input type="checkbox" name="hobbies" value="coding"><span>Coding</span></label>
+                </div>
+            </fieldset>
+
+            <fieldset class="soft-section">
+                <legend>What kind of support would help?</legend>
+                <div class="answer-grid compact-answers">
+                    <label><input required type="radio" name="support_preference" value="solo"><span>A private routine I can follow alone</span></label>
+                    <label><input type="radio" name="support_preference" value="mentor"><span>A mentor, teacher, or senior for direction</span></label>
+                    <label><input type="radio" name="support_preference" value="peer"><span>A friend or peer group for consistency</span></label>
+                </div>
+                <div class="choice-grid pill-grid top-space">
+                    <label><input type="checkbox" name="personality" value="creative"><span>Creative</span></label>
+                    <label><input type="checkbox" name="personality" value="disciplined"><span>Disciplined</span></label>
+                    <label><input type="checkbox" name="personality" value="social"><span>Social</span></label>
+                    <label><input type="checkbox" name="personality" value="curious"><span>Curious</span></label>
+                </div>
+            </fieldset>
+
+            <div class="actions">
+                <a class="button ghost" href="{{ url_for('home') }}">Back</a>
+                <button class="button secondary" type="submit">Create my reset plan</button>
+            </div>
+        </form>
+    </main>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

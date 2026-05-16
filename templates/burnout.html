@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burnout Tracker | LifeCompass</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="{{ url_for('home') }}">LifeCompass</a>
+        <nav><a href="{{ url_for('dashboard') }}">Dashboard</a></nav>
+    </header>
+    <main class="form-shell">
+        <section class="page-heading energy-heading page-depth" data-reveal>
+            <p class="eyebrow">Burnout Recovery Tracker</p>
+            <h1>Score your current load</h1>
+            <p>Rate each item from 1 to 5. The result creates a weekly schedule with hobby time, reset blocks, and mood tracking.</p>
+        </section>
+        {% if assessment %}
+            <section class="result-card" data-reveal>
+                <h2>{{ assessment.level }}</h2>
+                <p>Your score: {{ assessment.score }}/50</p>
+            </section>
+        {% endif %}
+        <form method="post" class="questionnaire">
+            <div class="dashboard-grid">
+                {% for item in burnout.assessment %}
+                    <label class="mini-score">{{ loop.index }}. {{ item }}
+                        <select name="q{{ loop.index }}">
+                            <option value="1">1 low</option>
+                            <option value="2">2</option>
+                            <option value="3" selected>3</option>
+                            <option value="4">4</option>
+                            <option value="5">5 high</option>
+                        </select>
+                    </label>
+                {% endfor %}
+            </div>
+            <div class="actions"><button class="button secondary" type="submit">Calculate</button></div>
+        </form>
+        <section class="dashboard-grid">
+            {% for day in burnout.schedule %}
+                <article class="feature-panel" data-reveal>
+                    <h3>{{ day.day }}</h3>
+                    <p>{{ day.plan }}</p>
+                </article>
+            {% endfor %}
+        </section>
+    </main>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Second Life Mode | LifeCompass</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="{{ url_for('home') }}">LifeCompass</a>
+        <nav><a href="{{ url_for('dashboard') }}">Dashboard</a></nav>
+    </header>
+    <main class="form-shell">
+        <section class="page-heading energy-heading page-depth" data-reveal>
+            <p class="eyebrow">Second Life Mode 25+</p>
+            <h1>Plan a pivot without ignoring reality</h1>
+            <p>Assess sunk cost, bridge courses, runway, and break-even timeline before making a career switch.</p>
+        </section>
+        {% if preview %}
+            <section class="result-card" data-reveal>
+                <h2>Suggested pivot: {{ preview.pivot }}</h2>
+                <p>{{ preview.sunk_cost_note }}</p>
+                <p>{{ preview.break_even }}</p>
+            </section>
+        {% endif %}
+        <form method="post" class="questionnaire">
+            <div class="field-grid">
+                <div class="field-group"><label>Target career<input name="target" placeholder="Digital Marketer"></label></div>
+                <div class="field-group"><label>Years in current field<input name="years_current" type="text" placeholder="3"></label></div>
+                <div class="field-group"><label>Monthly income<input name="monthly_income" type="text" placeholder="40000"></label></div>
+                <div class="field-group"><label>Monthly cost<input name="monthly_cost" type="text" placeholder="25000"></label></div>
+                <div class="field-group"><label>Savings<input name="savings" type="text" placeholder="150000"></label></div>
+            </div>
+            <div class="actions"><button class="button primary" type="submit">Calculate pivot plan</button></div>
+        </form>
+        {% if plan %}
+            <section class="result-card" data-reveal>
+                <h2>{{ plan.target }} bridge plan</h2>
+                <p><strong>Runway:</strong> {{ plan.runway }} months</p>
+                <p><strong>Break-even:</strong> {{ plan.break_even }}</p>
+                <p>{{ plan.advice }}</p>
+                <div class="skill-pills">
+                    {% for course in plan.bridge_courses %}
+                        <span>{{ course }}</span>
+                    {% endfor %}
+                </div>
+            </section>
+        {% endif %}
+    </main>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

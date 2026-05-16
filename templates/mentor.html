@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Mentor | LifeCompass</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="{{ url_for('home') }}">LifeCompass</a>
+        <nav>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('result') }}">Result</a>
+        </nav>
+    </header>
+    <main class="form-shell">
+        <section class="page-heading energy-heading page-depth" data-reveal>
+            <p class="eyebrow">AI Mentor</p>
+            <h1>Ask honest career questions</h1>
+            <p>Uses Gemini if `GEMINI_API_KEY` is set, supports `GEMINI_MODEL`, tries Ollama locally, and falls back to built-in honest advice.</p>
+        </section>
+        <section class="chat-panel" data-reveal>
+            <div class="chat-log" data-chat-log>
+                <div class="chat-message bot">Ask about salary, risk, backup options, where to start, or whether a path is realistic.</div>
+            </div>
+            <form class="chat-form" data-chat-form>
+                <input name="message" placeholder="Example: Is this career risky in India?">
+                <button class="button primary" type="submit">Ask</button>
+            </form>
+        </section>
+    </main>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

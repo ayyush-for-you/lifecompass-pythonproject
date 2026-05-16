@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | LifeCompass</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="{{ url_for('home') }}">LifeCompass</a>
+        <nav>
+            <a href="{{ url_for('result') }}">Result</a>
+            <a href="{{ url_for('mentor') }}">AI Mentor</a>
+            <a href="{{ url_for('burnout_tracker') }}">Burnout Tracker</a>
+            <a href="{{ url_for('second_life') }}">Second Life</a>
+        </nav>
+    </header>
+
+    <main class="result-shell">
+        <section class="page-heading energy-heading page-depth" data-reveal>
+            <p class="eyebrow">Visual Dashboard</p>
+            <h1>Your action cockpit</h1>
+            <p>Match percentages, weekly plan, skill gaps, financial reality, India data, community, export, and share tools in one place.</p>
+            <div class="hero-actions">
+                <a class="button primary" href="{{ url_for('export_report_pdf') }}">Download report PDF</a>
+                <a class="button secondary" href="{{ url_for('export_resume_pdf') }}">Download resume PDF</a>
+                <a class="button ghost" href="{{ url_for('timeline_ics') }}">Export calendar</a>
+                <button class="button ghost" type="button" data-dark-toggle>Dark mode</button>
+                <a class="button glass share-dark" target="_blank" href="https://wa.me/?text={{ features.whatsapp_text }}">Share on WhatsApp</a>
+            </div>
+        </section>
+
+        <section class="dashboard-grid">
+            <article class="feature-panel interactive-card" data-reveal>
+                <span class="mode-label">Match</span>
+                <h2>Career Match Percentages</h2>
+                {% for item in features.dashboard.match_cards %}
+                    <div class="meter-row">
+                        <span>{{ item.domain }}</span>
+                        <strong>{{ item.score|round|int }}%</strong>
+                        <div><i style="width: {{ item.score }}%"></i></div>
+                    </div>
+                {% endfor %}
+            </article>
+
+            <article class="feature-panel interactive-card" data-reveal>
+                <span class="mode-label">Skill Gap</span>
+                <h2>{{ features.skill_gap.career }}</h2>
+                <p><strong>Estimated transition:</strong> {{ features.skill_gap.transition_time }}</p>
+                <h3>Missing skills</h3>
+                <div class="skill-pills">
+                    {% for skill in features.skill_gap.missing %}
+                        <span>{{ skill }}</span>
+                    {% endfor %}
+                </div>
+                <h3>Free resources</h3>
+                <ul>
+                    {% for resource in features.skill_gap.resources %}
+                        <li>{{ resource }}</li>
+                    {% endfor %}
+                </ul>
+            </article>
+
+            <article class="feature-panel interactive-card" data-reveal>
+                <span class="mode-label">Timeline</span>
+                <h2>45-Minute Weekly Planner</h2>
+                <p>Daily micro-tasks for {{ features.timeline.estimated_months }} months of exploration.</p>
+                <ol class="compact-list">
+                    {% for task in features.timeline.weeks[0].tasks %}
+                        <li>{{ task }}</li>
+                    {% endfor %}
+                </ol>
+                <a class="button primary" target="_blank" href="{{ features.timeline.calendar_url }}">Open in Google Calendar</a>
+            </article>
+        </section>
+
+        <section>
+            <div class="section-heading">
+                <h2>Financial Reality Check</h2>
+                <p>Use this before emotionally committing to a path.</p>
+            </div>
+            <div class="recommendation-grid">
+                {% for item in features.financials %}
+                    <article class="recommendation-card interactive-card" data-reveal>
+                        <span>{{ item.demand }}</span>
+                        <h3>{{ item.career }}</h3>
+                        <p><strong>Salary:</strong> {{ item.salary }}</p>
+                        <p><strong>Education cost:</strong> {{ item.education_cost }}</p>
+                        <p><strong>Scholarship info:</strong> {{ item.scholarships }}</p>
+                        <p><strong>Freelance potential:</strong> {{ item.freelance }}</p>
+                        <form method="post" action="{{ url_for('not_interested') }}" class="mini-form">
+                            <input type="hidden" name="career" value="{{ item.career }}">
+                            <input name="reason" placeholder="Why not interested?">
+                            <button class="button ghost" type="submit">Not interested</button>
+                        </form>
+                    </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="dashboard-grid">
+            <article class="feature-panel" data-reveal>
+                <span class="mode-label">7-Day Trial</span>
+                <h2>Low-Risk Experiment</h2>
+                <ol class="compact-list">
+                    {% for item in features.trial %}
+                        <li>Day {{ item.day }}: {{ item.task }}</li>
+                    {% endfor %}
+                </ol>
+            </article>
+
+            <article class="feature-panel" data-reveal>
+                <span class="mode-label">Peer Stories</span>
+                <h2>Unconventional Examples</h2>
+                {% for story in features.stories %}
+                    <div class="story-block">
+                        <strong>Age {{ story.age }} · {{ story.background }}</strong>
+                        <p>{{ story.path }}</p>
+                        <small>{{ story.lesson }}</small>
+                    </div>
+                {% endfor %}
+            </article>
+
+            <article class="feature-panel" data-reveal>
+                <span class="mode-label">Community</span>
+                <h2>Support Features</h2>
+                <h3>Groups</h3>
+                <div class="skill-pills">
+                    {% for group in features.community.groups %}
+                        <span>{{ group }}</span>
+                    {% endfor %}
+                </div>
+                <h3>30-Day Challenges</h3>
+                <ul>
+                    {% for challenge in features.community.challenges %}
+                        <li>{{ challenge }}</li>
+                    {% endfor %}
+                </ul>
+                <h3>Badges</h3>
+                <div class="skill-pills">
+                    {% for badge in features.community.badges %}
+                        <span>{{ badge }}</span>
+                    {% endfor %}
+                </div>
+            </article>
+        </section>
+
+        <section class="dashboard-grid">
+            <article class="feature-panel" data-reveal>
+                <span class="mode-label">India Data</span>
+                <h2>Localized Guidance</h2>
+                {% for item in features.india.schemes %}
+                    <p><strong>{{ item.name }}:</strong> {{ item.detail }} <a target="_blank" href="{{ item.url }}">Open</a></p>
+                {% endfor %}
+                <h3>Entrance Exams</h3>
+                <ul>
+                    {% for exam in features.india.entrance_exams %}
+                        <li>{{ exam.name }} for {{ exam.for }} · <a target="_blank" href="{{ exam.url }}">official link</a></li>
+                    {% endfor %}
+                </ul>
+            </article>
+
+            <article class="feature-panel" data-reveal>
+                <span class="mode-label">Auto Resume</span>
+                <h2>{{ features.resume.headline }}</h2>
+                <p>{{ features.resume.summary }}</p>
+                <h3>Suggested projects</h3>
+                <ul>
+                    {% for project in features.resume.projects %}
+                        <li>{{ project }}</li>
+                    {% endfor %}
+                </ul>
+                <h3>Keywords</h3>
+                <div class="skill-pills">
+                    {% for keyword in features.resume.keywords %}
+                        <span>{{ keyword }}</span>
+                    {% endfor %}
+                </div>
+            </article>
+
+            <article class="feature-panel" data-reveal>
+                <span class="mode-label">Balance</span>
+                <h2>Recovery + Progress</h2>
+                <ul>
+                    {% for item in features.burnout.resources %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+                <a class="button secondary" href="{{ url_for('burnout_tracker') }}">Open tracker</a>
+            </article>
+        </section>
+    </main>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

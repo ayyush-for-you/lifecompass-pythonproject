@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeCompass</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="{{ url_for('home') }}">LifeCompass</a>
+        <nav>
+            <a href="{{ url_for('mode1') }}">Career Discovery</a>
+            <a href="{{ url_for('mode2') }}">Balance</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-scene">
+            <div class="hero-copy">
+                <p class="eyebrow">Intelligent career and life guidance</p>
+                <h1>Choose a path with clarity, not pressure.</h1>
+                <p class="lead">
+                    LifeCompass helps students and individuals understand their interests,
+                    skills, personality, and realistic next steps across traditional and
+                    unconventional careers.
+                </p>
+                <div class="hero-actions">
+                    <a class="button primary" href="{{ url_for('mode1') }}">Start discovery</a>
+                    <a class="button glass" href="{{ url_for('mode2') }}">Find balance</a>
+                </div>
+            </div>
+        </section>
+
+        <div class="shell">
+            <section class="focus-strip" aria-label="LifeCompass focus areas" data-reveal>
+                <span>Tech</span>
+                <span>Science</span>
+                <span>Creative</span>
+                <span>Sports</span>
+                <span>Business</span>
+            </section>
+
+            <section class="mode-grid">
+                <article class="mode-card interactive-card" data-reveal>
+                    <span class="mode-label">Mode 1</span>
+                    <h2>Career Discovery</h2>
+                    <p>For students who feel confused after 12th or want to compare multiple future paths.</p>
+                    <ul>
+                        <li>Question-based interpretation</li>
+                        <li>Primary and secondary career options</li>
+                        <li>Effort, risk, and backup guidance</li>
+                    </ul>
+                    <a class="button primary" href="{{ url_for('mode1') }}">Start discovery</a>
+                </article>
+
+                <article class="mode-card interactive-card" data-reveal>
+                    <span class="mode-label">Mode 2</span>
+                    <h2>Balance & Rediscovery</h2>
+                    <p>For people who feel stuck, burned out, or disconnected from hobbies and side interests.</p>
+                    <ul>
+                    <li>Interactive self-reflection</li>
+                        <li>Side skill suggestions</li>
+                        <li>Practical balance steps</li>
+                    </ul>
+                    <a class="button secondary" href="{{ url_for('mode2') }}">Find balance</a>
+                </article>
+            </section>
+
+            <section class="journey-band" data-reveal>
+                <div>
+                    <span class="mode-label">How it feels</span>
+                    <h2>An interactive exploration, then a practical map.</h2>
+                </div>
+                <div class="journey-steps">
+                    <span>Answer</span>
+                    <span>Interpret</span>
+                    <span>Compare</span>
+                    <span>Begin</span>
+                </div>
+            </section>
+        </div>
+    </main>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
