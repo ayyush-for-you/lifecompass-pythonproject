@@ -328,6 +328,15 @@ LifeCompass/
 **Ayush Kumar**
 B.Tech CSE (AI & ML)
 
+**Anshika Mishra**
+B.Tech CSE (AI & ML)
+
+**Malvika Srivastav**
+B.Tech CSE (AI & ML)
+
+**Simran Rajput**
+B.Tech CSE (AI & ML)
+
 ---
 
 # 📌 Conclusion
