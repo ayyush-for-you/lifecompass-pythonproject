@@ -24,7 +24,6 @@ from feature_engine import (
 from models import UserProfile
 from recommender import LifeCompassRecommender, SubmissionStore
 
-
 BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
 STATIC_DIR = BASE_DIR / "static"
