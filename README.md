@@ -326,7 +326,7 @@ LifeCompass/
 # 👨‍💻 Author
 
 **Ayush Kumar**
-B.Tech CSE (AI & ML)
+B.Tech CSE (AI & ML) 25LBCS3142
 
 **Anshika Mishra**
 B.Tech CSE (AI & ML)
